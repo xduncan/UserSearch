@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center"><i class="fa fa-github"></i> UserSearch</h1>
+        <br/>
+        <form class="well">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search for a GitHub User..." [(ngModel)]="username" name="username" (keyup)="searchUser()">
+            </div>
+        </form>
+    </div>
+</div>
+<div *ngIf="user">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{user.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-3">
+                <img class="img-thumbnail" src="{{user.avatar_url}}">
+                <a href="{{user.html_url}}" class="btn btn-default btn-block" target="_blank">View Profile</a>
+            </div>
+            <div class="col-md-9">
+                <div class="stats">
+                    <span class="label label-default">{{user.public_repos}} Public Repos</span>
+                    <span class="label label-primary">{{user.public_gists}} Public Gists</span>
+                    <span class="label label-success">{{user.followers}} Followers</span>
+                    <span class="label label-info">{{user.following}} Following</span>
+                </div>
+                <br/>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong><i class="fa fa-user fa-fw"></i> </strong>{{user.login}}</li>
+                    <li class="list-group-item"><strong><i class="fa fa-quote-left fa-fw"></i> </strong>{{user.bio}}</li>
+                    <br/>
+                    <li class="list-group-item"><strong><i class="fa fa-map fa-fw"></i> </strong>{{user.location}}</li>
+                    <li class="list-group-item"><strong><i class="fa fa-building fa-fw"></i> </strong>{{user.company}}</li>
+                    <li class="list-group-item"><strong><i class="fa fa-send fa-fw"></i> </strong>{{user.email}}</li>
+                    <li class="list-group-item"><strong><i class="fa fa-globe fa-fw"></i> </strong>{{user.blog}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User Repos</h3>
+        </div>
+        <div class="panel-body">
+            <div *ngFor="let repo of repos; let i=index">
+                <ng-template [ngIf]="i<10">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4><a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a></h4>
+                            <p>{{repo.description}}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <span class="label label-default">{{repo.watchers}} Watchers</span>
+                            <span class="label label-primary">{{repo.forks}} Forks</span>
+                            <span class="label label-success">{{repo.stargazers_count}} Stars</span>
+                        </div>
+                    </div>
+                    <hr>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
